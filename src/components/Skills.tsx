@@ -2,67 +2,63 @@ import { motion } from "framer-motion";
 import { Code2, Globe, Server, Box, Brain } from "lucide-react";
 
 const categories = [
-  {
-    label: "Programming",
-    icon: Code2,
-    skills: ["Java", "Python"],
-  },
-  {
-    label: "Web",
-    icon: Globe,
-    skills: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    label: "Backend & Frameworks",
-    icon: Server,
-    skills: ["Spring Boot", "Hibernate", "JDBC", "JPA"],
-  },
-  {
-    label: "Tools",
-    icon: Box,
-    skills: ["Maven", "Docker", "DockerHub", "Spring Tools"],
-  },
-  {
-    label: "Domain",
-    icon: Brain,
-    skills: ["Foundational ML"],
-  },
+  { label: "Programming", icon: Code2, skills: ["Java", "Python"], color: "primary" },
+  { label: "Web", icon: Globe, skills: ["HTML", "CSS", "JavaScript"], color: "primary" },
+  { label: "Backend & Frameworks", icon: Server, skills: ["Spring Boot", "Hibernate", "JDBC", "JPA"], color: "accent-purple" },
+  { label: "Tools", icon: Box, skills: ["Maven", "Docker", "DockerHub", "Spring Tools"], color: "accent-purple" },
+  { label: "Domain", icon: Brain, skills: ["Foundational ML"], color: "accent-pink" },
 ];
 
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" as const },
+  transition: { duration: 0.5, delay, ease: [0.2, 0, 0, 1] as [number, number, number, number] },
+});
+
 const Skills = () => (
-  <section id="skills" className="py-24 px-6">
-    <div className="max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.4, ease: [0.2, 0, 0, 1] }}
-      >
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">Skills</p>
-        <h2 className="text-3xl font-semibold tracking-tight mb-12">Technical Stack</h2>
+  <section id="skills" className="relative py-28 px-6 overflow-hidden">
+    <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-[hsl(var(--accent-purple))]/5 rounded-full blur-[120px] pointer-events-none" />
+
+    <div className="relative max-w-5xl mx-auto">
+      <motion.div {...fade()}>
+        <div className="flex items-center gap-3 mb-3">
+          <span className="w-8 h-[2px] bg-gradient-to-r from-primary to-[hsl(var(--accent-purple))]" />
+          <p className="font-mono text-xs uppercase tracking-widest text-primary">Skills</p>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          Technical <span className="gradient-text">Stack</span>
+        </h2>
+        <p className="mt-4 text-sm text-muted-foreground max-w-lg">
+          Tools and technologies I use to bring ideas to life.
+        </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {categories.map((cat, i) => (
           <motion.div
             key={cat.label}
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.4, delay: i * 0.08, ease: [0.2, 0, 0, 1] }}
-            className="group rounded-xl bg-surface p-6 card-shadow transition-all duration-200 hover:card-shadow-hover hover:-translate-y-0.5"
+            {...fade(0.1 + i * 0.08)}
+            className="group relative rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/50 p-7 transition-all duration-300 hover:border-primary/30 hover:-translate-y-1"
           >
-            <cat.icon size={18} className="text-primary mb-3" />
-            <h3 className="text-sm font-semibold mb-3">{cat.label}</h3>
-            <div className="flex flex-wrap gap-2">
-              {cat.skills.map((s) => (
-                <span
-                  key={s}
-                  className="font-mono text-xs px-2.5 py-1 rounded-md bg-secondary text-muted-foreground"
-                >
-                  {s}
-                </span>
-              ))}
+            {/* Glow on hover */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-[hsl(var(--accent-purple))]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+            <div className="relative">
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors duration-300">
+                <cat.icon size={20} className="text-primary" />
+              </div>
+              <h3 className="text-sm font-bold tracking-wide mb-4">{cat.label}</h3>
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((s) => (
+                  <span
+                    key={s}
+                    className="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-secondary/80 text-muted-foreground border border-border/30 hover:text-foreground hover:border-primary/20 transition-colors duration-200"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
         ))}

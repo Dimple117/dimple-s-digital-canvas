@@ -2,26 +2,32 @@ import { motion } from "framer-motion";
 import { Globe, Brain, Container, ArrowRight } from "lucide-react";
 
 const services = [
-  { icon: Globe, title: "WEB DEVELOPMENT", desc: "Full-stack web applications using modern frameworks like Spring Boot and React." },
-  { icon: Brain, title: "MACHINE LEARNING SOLUTIONS", desc: "Data-driven solutions including NLP, speech recognition, and classification models." },
-  { icon: Container, title: "DEVOPS ENGINEERING", desc: "Containerization with Docker, CI/CD pipelines, and deployment automation." },
+  { icon: Globe, title: "Web Development", desc: "Full-stack web applications using modern frameworks like Spring Boot and React.", num: "01" },
+  { icon: Brain, title: "Machine Learning", desc: "Data-driven solutions including NLP, speech recognition, and classification models.", num: "02" },
+  { icon: Container, title: "DevOps Engineering", desc: "Containerization with Docker, CI/CD pipelines, and deployment automation.", num: "03" },
 ];
 
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" as const },
+  transition: { duration: 0.5, delay, ease: [0.2, 0, 0, 1] as [number, number, number, number] },
+});
+
 const Services = () => (
-  <section id="services" className="py-24 px-6">
-    <div className="max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16"
-      >
+  <section id="services" className="relative py-28 px-6 overflow-hidden">
+    <div className="absolute top-0 left-1/2 w-[500px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2" />
+
+    <div className="relative max-w-5xl mx-auto">
+      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">— My Services ?</p>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="w-8 h-[2px] bg-gradient-to-r from-primary to-[hsl(var(--accent-purple))]" />
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">Services</p>
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            WHAT I'M<br />
-            <span className="gradient-text">OFFERING</span>
+            What I'm<br />
+            <span className="gradient-text">Offering</span>
           </h2>
         </div>
         <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
@@ -29,24 +35,30 @@ const Services = () => (
         </p>
       </motion.div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         {services.map((s, i) => (
           <motion.div
             key={s.title}
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
-            className="group rounded-xl bg-surface p-8 card-shadow transition-all duration-200 hover:card-shadow-hover hover:-translate-y-1 border border-transparent hover:border-primary/20"
+            {...fade(0.1 + i * 0.1)}
+            className="group relative rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/50 p-8 transition-all duration-300 hover:border-primary/30 hover:-translate-y-1"
           >
-            <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors duration-200">
-              <s.icon size={22} className="text-muted-foreground group-hover:text-primary transition-colors" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-[hsl(var(--accent-purple))]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+            <div className="relative">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-300">
+                  <s.icon size={22} className="text-primary" />
+                </div>
+                <span className="text-2xl font-bold text-border/40 font-mono group-hover:text-primary/20 transition-colors">{s.num}</span>
+              </div>
+
+              <h3 className="text-base font-bold tracking-wide mb-3">{s.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{s.desc}</p>
+
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground group-hover:text-primary transition-colors cursor-pointer">
+                Learn More <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+              </span>
             </div>
-            <h3 className="font-mono text-sm font-bold tracking-wide mb-3">{s.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">{s.desc}</p>
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors cursor-pointer">
-              READ MORE <ArrowRight size={12} />
-            </span>
           </motion.div>
         ))}
       </div>
