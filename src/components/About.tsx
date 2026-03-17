@@ -7,11 +7,12 @@ const education = [
   { year: "2019", title: "High School", place: "Marimallappa High School", detail: "Completed Secondary Education" },
 ];
 
+const ease = [0.2, 0, 0, 1] as const;
 const fade = {
   initial: { opacity: 0, y: 8 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.4, ease: [0.2, 0, 0, 1] },
+  viewport: { once: true, margin: "-50px" as const },
+  transition: { duration: 0.4, ease: ease as unknown as [number, number, number, number] },
 };
 
 const About = () => (
