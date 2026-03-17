@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Check, Download, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import profileImg from "@/assets/profile.jpg";
 
 const roles = ["Web Developer", "ML Enthusiast", "DevOps Learner"];
+
+const marqueeItems = [
+  "WEB DEVELOPMENT",
+  "MACHINE LEARNING",
+  "SPRING BOOT",
+  "PYTHON",
+  "DOCKER",
+  "JAVA",
+  "NLP",
+  "DEVOPS",
+  "PYTORCH",
+];
 
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -27,157 +40,212 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [text, deleting, roleIndex]);
 
-  const stats = [
-    { value: "8.53", label: "CGPA" },
-    { value: "3+", label: "Projects" },
-    { value: "5th", label: "Semester" },
-  ];
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-primary/3 rounded-full blur-[80px] pointer-events-none" />
+    <>
+      <section className="relative min-h-screen flex items-center px-6 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[hsl(var(--accent-purple))]/8 rounded-full blur-[100px]" />
+          <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] bg-[hsl(var(--accent-pink))]/5 rounded-full blur-[80px]" />
+        </div>
 
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: "64px 64px",
-        }}
-      />
+        {/* Grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
 
-      <div className="relative max-w-5xl w-full pt-24 pb-12">
-        {/* Top badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex justify-center md:justify-start mb-8"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            <span className="font-mono text-xs text-primary">Open to opportunities</span>
-          </div>
-        </motion.div>
+        <div className="relative max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center pt-24 pb-16">
+          {/* Left: Text content */}
+          <div>
+            {/* Greeting */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex items-center gap-2 mb-6"
+            >
+              <span className="text-2xl">👋</span>
+              <span className="text-muted-foreground text-sm">Hello! I'm</span>
+            </motion.div>
 
-        {/* Main heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="text-center md:text-left"
-        >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[0.95]">
-            <span className="block text-foreground">Dimple</span>
-            <span className="block mt-1">
-              <span className="text-foreground">C </span>
-              <span className="text-primary">R</span>
-              <span className="text-primary">.</span>
-            </span>
-          </h1>
-        </motion.div>
+            {/* Name */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]"
+            >
+              <span className="gradient-text">Dimple</span>{" "}
+              <span className="text-foreground">C R</span>
+            </motion.h1>
 
-        {/* Typing role */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
-          className="mt-6 text-center md:text-left"
-        >
-          <div className="inline-flex items-center gap-3 h-8">
-            <span className="w-8 h-[1px] bg-primary hidden md:block" />
-            <span className="text-lg md:text-xl text-muted-foreground font-medium">
-              {text}
-              <span className="inline-block w-[2px] h-5 bg-primary ml-0.5 animate-pulse align-middle" />
-            </span>
-          </div>
-        </motion.div>
+            {/* Subtitle with typing */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="mt-4 flex items-center gap-3"
+            >
+              <span className="w-10 h-[2px] bg-gradient-to-r from-primary to-[hsl(var(--accent-purple))]" />
+              <span className="text-lg text-muted-foreground font-medium">
+                {text}
+                <span className="inline-block w-[2px] h-5 bg-primary ml-0.5 animate-pulse align-middle" />
+              </span>
+            </motion.div>
 
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
-          className="mt-6 text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed text-center md:text-left"
-        >
-          Building systems that solve human problems — combining web development,
-          machine learning, and DevOps to create technology that matters.
-        </motion.p>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+              className="mt-6 text-sm text-muted-foreground max-w-md leading-relaxed"
+            >
+              I'm a <span className="text-foreground font-medium">Computer Science student</span>,
+              aspiring engineer & human who loves building tech that reduces stress and helps society.
+            </motion.p>
 
-        {/* CTA row */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
-        >
-          <a
-            href="#projects"
-            className="group inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-          >
-            View Projects
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-surface px-6 py-3 text-sm font-medium text-foreground card-shadow transition-all duration-200 hover:card-shadow-hover active:scale-[0.98]"
-          >
-            Contact Me
-          </a>
+            {/* Bullet points */}
+            <motion.ul
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              className="mt-6 space-y-2.5"
+            >
+              {[
+                "Building systems that solve human problems",
+                "Clean code & scalable architecture",
+                "Always learning, always shipping",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                  <Check size={14} className="text-primary shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
 
-          {/* Social icons */}
-          <div className="flex items-center gap-1 ml-0 sm:ml-4">
-            {[
-              { icon: Github, href: "https://github.com/Dimple117" },
-              { icon: Linkedin, href: "https://linkedin.com/in/dimple-c-r" },
-              { icon: Mail, href: "mailto:dimplecr07@gmail.com" },
-            ].map(({ icon: Icon, href }) => (
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
               <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface transition-all duration-200"
+                href="#contact"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-[hsl(var(--accent-purple))] px-6 py-3 text-sm font-semibold text-foreground transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
               >
-                <Icon size={16} />
+                Let's Talk
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
               </a>
-            ))}
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-medium text-foreground transition-all duration-200 hover:bg-surface-hover hover:border-muted active:scale-[0.98]"
+              >
+                <Download size={14} />
+                Download CV
+              </a>
+            </motion.div>
+
+            {/* Social icons */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
+              className="mt-8 flex items-center gap-4"
+            >
+              {[
+                { icon: Github, href: "https://github.com/Dimple117", label: "GitHub" },
+                { icon: Linkedin, href: "https://linkedin.com/in/dimple-c-r", label: "LinkedIn" },
+                { icon: Mail, href: "mailto:dimplecr07@gmail.com", label: "Email" },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full border border-border bg-surface flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-200"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </motion.div>
           </div>
-        </motion.div>
 
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
-          className="mt-16 flex items-center gap-8 md:gap-12 justify-center md:justify-start"
-        >
-          {stats.map((s, i) => (
-            <div key={i} className="text-center md:text-left">
-              <p className="text-2xl md:text-3xl font-semibold tracking-tight tabular-nums">{s.value}</p>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
-                {s.label}
-              </p>
+          {/* Right: Profile image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="relative hidden md:flex justify-center"
+          >
+            {/* Decorative rings */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[340px] h-[340px] rounded-full border border-border/30 absolute" />
+              <div className="w-[400px] h-[400px] rounded-full border border-border/15 absolute" />
             </div>
-          ))}
-        </motion.div>
-      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <ArrowDown size={16} className="text-muted-foreground animate-bounce" />
-      </motion.div>
-    </section>
+            {/* Gradient glow behind image */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] bg-gradient-to-br from-primary/20 via-[hsl(var(--accent-purple))]/20 to-[hsl(var(--accent-pink))]/10 rounded-full blur-[40px]" />
+
+            {/* Profile image */}
+            <div className="relative w-[280px] h-[280px] lg:w-[320px] lg:h-[320px] rounded-full overflow-hidden ring-2 ring-border">
+              <img
+                src={profileImg}
+                alt="Dimple C R"
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.4 }}
+              className="absolute bottom-8 right-8 lg:right-4 bg-surface/90 backdrop-blur-sm border border-border rounded-xl px-4 py-2.5 card-shadow"
+            >
+              <div className="flex items-center gap-2">
+                <Sparkles size={14} className="text-primary" />
+                <span className="text-xs font-medium">CGPA 8.53</span>
+              </div>
+            </motion.div>
+
+            {/* Floating dot accent */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-12 right-12 w-3 h-3 rounded-full bg-primary glow-primary"
+            />
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-20 left-8 w-2 h-2 rounded-full bg-[hsl(var(--accent-purple))] glow-purple"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Marquee skills ticker */}
+      <div className="relative border-y border-border bg-surface/50 py-4 overflow-hidden">
+        <div className="marquee-track">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className="flex items-center gap-4 mx-6 whitespace-nowrap">
+              <Sparkles size={12} className="text-primary" />
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                {item}
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
