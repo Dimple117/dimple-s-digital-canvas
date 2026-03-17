@@ -65,7 +65,7 @@ const Experience = () => (
 
                 <div className="mt-6 pt-5 border-t border-border/30">
                   <span className="inline-flex items-center gap-2 text-xs font-medium">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                     <span className="text-muted-foreground">Fresher — Eager to Grow & Contribute</span>
                   </span>
                 </div>
