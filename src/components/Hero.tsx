@@ -198,7 +198,7 @@ const Hero = () => {
               <img
                 src={profileImg}
                 alt="Dimple C R"
-                className="w-full h-full object-cover object-[center_15%] scale-125"
+                className="w-full h-full object-cover object-[center_8%] scale-110"
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
